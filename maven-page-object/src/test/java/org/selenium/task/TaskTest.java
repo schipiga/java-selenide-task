@@ -1,4 +1,4 @@
-package my.selenium.task;
+package org.selenium.task;
 
 import com.automation.remarks.junit.VideoRule;
 import com.automation.remarks.video.annotations.Video;

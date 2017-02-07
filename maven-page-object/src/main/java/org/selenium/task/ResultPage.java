@@ -1,4 +1,4 @@
-package my.selenium.task;
+package org.selenium.task;
 
 import com.codeborne.selenide.ElementsCollection;
 import io.netty.util.internal.ThreadLocalRandom;
