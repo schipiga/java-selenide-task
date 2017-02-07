@@ -19,7 +19,8 @@ repositories {
 dependencies {
     compile 'org.slf4j:slf4j-api:1.7.22',
             'org.assertj:assertj-core:3.6.2',
-            'commons-lang:commons-lang:2.6'
+            'commons-lang:commons-lang:2.6',
+            group: 'com.automation-remarks', name: 'video-recorder-junit', version: '1.+'
 
     runtime 'org.slf4j:slf4j-log4j12:1.7.22',
             'log4j:log4j:1.2.17'

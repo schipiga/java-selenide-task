@@ -1,15 +1,24 @@
 package org.jbehave.task;
 
+import com.automation.remarks.junit.VideoRule;
+import com.automation.remarks.video.annotations.Video;
+import com.automation.remarks.video.enums.RecorderType;
+import com.automation.remarks.video.enums.RecordingMode;
+import com.automation.remarks.video.enums.VideoSaveMode;
+import com.automation.remarks.video.recorder.VideoRecorder;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import org.jbehave.core.annotations.BeforeStories;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
+import org.junit.Rule;
 import org.junit.Test;
 import org.openqa.selenium.By;
 
+import java.awt.*;
 import java.util.*;
+import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 import static org.jbehave.task.support.BehaviouralTestEmbedder.aBehaviouralTestRunner;
@@ -23,7 +32,11 @@ public class TaskTestScenario {
 
     private List<String> selectedAdverts;
 
+    @Rule
+    public VideoRule videoRule = new VideoRule();
+
     @Test
+    @Video(name = "task.story")
     public void berlinClockAcceptanceTests() throws Exception {
         aBehaviouralTestRunner()
                 .usingStepsFrom(this)
@@ -36,6 +49,16 @@ public class TaskTestScenario {
         String rootPath = System.getProperty("user.dir");
         System.setProperty("webdriver.chrome.driver", rootPath + "/../chromedriver");
         System.setProperty("selenide.browser", "chrome");
+
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        int width = (int) screenSize.getWidth();
+        int height = (int) screenSize.getHeight();
+        VideoRecorder.conf()
+                .videoEnabled(true)                       // Disabled video globally
+                .withVideoSaveMode(VideoSaveMode.ALL)     // Save videos for passed and failed tests
+                .withRecorderType(RecorderType.FFMPEG)    // Monte is Default recorder
+                .withRecordMode(RecordingMode.ANNOTATED)  // Record video only for tests with @Video
+                .withScreenSize(width, height);
     }
 
     @Given("I open a browser")
