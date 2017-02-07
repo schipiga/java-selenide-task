@@ -2,6 +2,8 @@ package org.jbehave.task;
 
 import org.jbehave.core.annotations.BeforeStories;
 import org.jbehave.core.annotations.Given;
+import org.jbehave.core.annotations.Then;
+import org.jbehave.core.annotations.When;
 import org.junit.Test;
 import org.openqa.selenium.By;
 
@@ -85,5 +87,30 @@ public class TaskTestScenario {
         $(By.name("topt[8][min]")).setValue(minCost);
         $(By.name("topt[8][max]")).setValue(maxCost);
         $(By.name("ffrm")).submit();
+    }
+
+    @Given("I select randomly $count adverts")
+    public void givenISelectRandomlyAdverts(int count) {
+        // PENDING
+    }
+
+    @Given("I open bookmarks page")
+    public void givenIOpenBookmarksPage() {
+        // PENDING
+    }
+
+    @Given("I add adverts to favourites")
+    public void givenIAddAdvertsToFavourites() {
+        // PENDING
+    }
+
+    @When("I open bookmarks page")
+    public void whenIOpenBookmarksPage() {
+        // PENDING
+    }
+
+    @Then("I see that my bookmarks match previously selected adverts")
+    public void thenISeeThatMyBookmarksMatchPreviouslySelectedAdverts() {
+        // PENDING
     }
 }

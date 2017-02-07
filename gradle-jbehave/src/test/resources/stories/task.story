@@ -16,3 +16,8 @@ And I sort results by Цена
 And I select deal type as Продажа
 And I open expanded search
 And I search with min cost 0 with max cost 300
+And I select randomly 3 adverts
+And I open bookmarks page
+And I add adverts to favourites
+When I open bookmarks page
+Then I see that my bookmarks match previously selected adverts
