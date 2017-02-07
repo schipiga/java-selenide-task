@@ -1,6 +1,7 @@
 package org.selenium.task;
 
 import org.openqa.selenium.By;
+import ru.yandex.qatools.allure.annotations.Step;
 
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.page;
@@ -10,6 +11,7 @@ import static com.codeborne.selenide.Selenide.page;
  */
 public class SectionPage {
 
+    @Step
     public SearchPage search() {
         $(By.linkText("Поиск")).click();
         return page(SearchPage.class);

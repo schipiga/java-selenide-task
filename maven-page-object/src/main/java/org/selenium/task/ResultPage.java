@@ -3,6 +3,7 @@ package org.selenium.task;
 import com.codeborne.selenide.ElementsCollection;
 import io.netty.util.internal.ThreadLocalRandom;
 import org.openqa.selenium.By;
+import ru.yandex.qatools.allure.annotations.Step;
 
 import java.util.*;
 
@@ -14,19 +15,23 @@ import static org.assertj.core.api.Assertions.*;
  */
 public class ResultPage {
 
+    @Step
     public void sortBy(String val) {
         $(By.linkText(val)).click();
     }
 
+    @Step
     public void dealType(String val) {
         $(By.xpath("//span[text()='Тип сделки:']//select")).selectOptionContainingText(val);
     }
 
+    @Step
     public SearchPage expandedSearch() {
         $(By.linkText("Расширенный поиск")).click();
         return page(SearchPage.class);
     }
 
+    @Step
     public List<String> selectRandomResults(int count) {
         ElementsCollection advertLinks = $$("tr div.d1 > a");
         ElementsCollection advertCheckboxes = $$("tr > td > input[type='checkbox']");
@@ -45,6 +50,7 @@ public class ResultPage {
         return selectedResults;
     }
 
+    @Step
     public BookmarksPage bookmarks() {
         $(By.linkText("Закладки")).click();
         return page(BookmarksPage.class);
