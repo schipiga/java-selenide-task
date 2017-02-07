@@ -17,7 +17,8 @@ public class TaskTest {
 
     @BeforeClass
     public static void SetUp() {
-        System.setProperty("webdriver.chrome.driver", "/home/schipiga/vega/projects/google-test/chromedriver");
+        String rootPath = System.getProperty("user.dir");
+        System.setProperty("webdriver.chrome.driver", rootPath + "/../chromedriver");
         System.setProperty("selenide.browser", "chrome");
     }
 
@@ -26,17 +27,23 @@ public class TaskTest {
     {
         IndexPage indexPage = open(URL, IndexPage.class);
         indexPage.changeLanguageTo("RU");
+
         SectionPage sectionPage = indexPage.selectSection("Электротехника");
         SearchPage searchPage = sectionPage.search();
+
         ResultPage resultPage = searchPage.search("Компьютер", "100", "1000", "Рига", "За последний месяц");
         resultPage.sortBy("Цена");
         resultPage.dealType("Продажа");
+
         searchPage = resultPage.expandedSearch();
         resultPage = searchPage.search(null, "0", "300", null, null);
+
         List<String> selectedResults = resultPage.selectRandomResults(3);
+
         BookmarksPage bookmarksPage = resultPage.bookmarks();
         bookmarksPage.addSelected();
         bookmarksPage = bookmarksPage.bookmarks();
+
         List<String> currentBookmarks = bookmarksPage.currentBookmarks();
 
         assertThat(currentBookmarks.size()).isEqualTo(selectedResults.size());

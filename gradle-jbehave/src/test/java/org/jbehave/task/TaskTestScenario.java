@@ -1,11 +1,16 @@
 package org.jbehave.task;
 
+import com.codeborne.selenide.ElementsCollection;
+import com.codeborne.selenide.SelenideElement;
 import org.jbehave.core.annotations.BeforeStories;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
 import org.junit.Test;
 import org.openqa.selenium.By;
+
+import java.util.*;
+import java.util.concurrent.ThreadLocalRandom;
 
 import static org.jbehave.task.support.BehaviouralTestEmbedder.aBehaviouralTestRunner;
 import static com.codeborne.selenide.Selenide.*;
@@ -15,6 +20,8 @@ import static org.assertj.core.api.Assertions.*;
  * Created by schipiga on 07.02.17.
  */
 public class TaskTestScenario {
+
+    private List<String> selectedAdverts;
 
     @Test
     public void berlinClockAcceptanceTests() throws Exception {
@@ -26,7 +33,8 @@ public class TaskTestScenario {
 
     @BeforeStories
     public void beforeStories() {
-        System.setProperty("webdriver.chrome.driver", "/home/schipiga/vega/projects/google-test/chromedriver");
+        String rootPath = System.getProperty("user.dir");
+        System.setProperty("webdriver.chrome.driver", rootPath + "/../chromedriver");
         System.setProperty("selenide.browser", "chrome");
     }
 
@@ -91,26 +99,46 @@ public class TaskTestScenario {
 
     @Given("I select randomly $count adverts")
     public void givenISelectRandomlyAdverts(int count) {
-        // PENDING
+        ElementsCollection advertLinks = $$("tr div.d1 > a");
+        ElementsCollection advertCheckboxes = $$("tr > td > input[type='checkbox']");
+
+        int size = advertLinks.size();
+        assertThat(size).isGreaterThanOrEqualTo(size);
+
+        selectedAdverts = new ArrayList<String>();
+
+        for (int i = 0; i < count; i++) {
+            int rnd = ThreadLocalRandom.current().nextInt(0, size);
+            advertCheckboxes.get(rnd).click();
+            selectedAdverts.add(advertLinks.get(rnd).getText().substring(0, 60));
+        }
     }
 
     @Given("I open bookmarks page")
     public void givenIOpenBookmarksPage() {
-        // PENDING
+        $(By.linkText("Закладки")).click();
     }
 
     @Given("I add adverts to favourites")
     public void givenIAddAdvertsToFavourites() {
-        // PENDING
+        $(By.linkText("Добавить выбранные в закладки")).click();
     }
 
     @When("I open bookmarks page")
     public void whenIOpenBookmarksPage() {
-        // PENDING
+        $(By.linkText("Закладки")).click();
     }
 
     @Then("I see that my bookmarks match previously selected adverts")
     public void thenISeeThatMyBookmarksMatchPreviouslySelectedAdverts() {
-        // PENDING
+        List<String> bookmarkAdverts = new ArrayList<String>();
+        ElementsCollection bookmarks = $$("table div.d1 > a");
+
+        for (SelenideElement bookmark: bookmarks) {
+            bookmarkAdverts.add(bookmark.getText().substring(0, 60));
+        }
+
+        assertThat(bookmarkAdverts.size()).isEqualTo(selectedAdverts.size());
+        assertThat(bookmarkAdverts).containsAll(selectedAdverts);
     }
 }
