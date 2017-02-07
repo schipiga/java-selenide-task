@@ -15,6 +15,7 @@ import org.jbehave.core.annotations.When;
 import org.junit.Rule;
 import org.junit.Test;
 import org.openqa.selenium.By;
+import ru.yandex.qatools.allure.annotations.Step;
 
 import java.awt.*;
 import java.util.*;
@@ -37,7 +38,7 @@ public class TaskTestScenario {
 
     @Test
     @Video(name = "task.story")
-    public void berlinClockAcceptanceTests() throws Exception {
+    public void TaskTest() throws Exception {
         aBehaviouralTestRunner()
                 .usingStepsFrom(this)
                 .withStory("task.story")
@@ -62,21 +63,25 @@ public class TaskTestScenario {
     }
 
     @Given("I open a browser")
+    @Step
     public void givenIOpenABrowser() {
         // PENDING
     }
 
     @Given("I go to $url")
+    @Step
     public void givenIGoTo(String url) {
         open(url);
     }
 
     @Given("I change language to $lang")
+    @Step
     public void givenIChangeLanguageTo(String lang) {
         $(By.linkText("RU")).click();
     }
 
     @Given("I search $query with min cost $minCost with max cost $maxCost with region $region with period $period")
+    @Step
     public void givenISearch(String query, String minCost, String maxCost, String region, String period) {
         $(By.name("topt[8][min]")).setValue(minCost);
         $(By.name("topt[8][max]")).setValue(maxCost);
@@ -89,31 +94,37 @@ public class TaskTestScenario {
     }
 
     @Given("I sort results by $sortType")
+    @Step
     public void givenISortBy(String sortType) {
         $(By.linkText(sortType)).click();
     }
 
     @Given("I select deal type as $dealType")
+    @Step
     public void givenISelectDealTypeAs(String dealType) {
         $(By.xpath("//span[text()='Тип сделки:']//select")).selectOptionContainingText(dealType);
     }
 
     @Given("I click section $section")
+    @Step
     public void givenIClickSection(String section) {
         $(By.linkText(section)).click();
     }
 
     @Given("I open search page")
+    @Step
     public void givenIOpenSearchPage() {
         $(By.linkText("Поиск")).click();
     }
 
     @Given("I open expanded search")
+    @Step
     public void givenIOpenExpandedSearch() {
         $(By.linkText("Расширенный поиск")).click();
     }
 
     @Given("I search with min cost $minCost with max cost $maxCost")
+    @Step
     public void givenIExpandSearch(String minCost, String maxCost) {
         $(By.name("topt[8][min]")).setValue(minCost);
         $(By.name("topt[8][max]")).setValue(maxCost);
@@ -121,6 +132,7 @@ public class TaskTestScenario {
     }
 
     @Given("I select randomly $count adverts")
+    @Step
     public void givenISelectRandomlyAdverts(int count) {
         ElementsCollection advertLinks = $$("tr div.d1 > a");
         ElementsCollection advertCheckboxes = $$("tr > td > input[type='checkbox']");
@@ -138,21 +150,25 @@ public class TaskTestScenario {
     }
 
     @Given("I open bookmarks page")
+    @Step
     public void givenIOpenBookmarksPage() {
         $(By.linkText("Закладки")).click();
     }
 
     @Given("I add adverts to favourites")
+    @Step
     public void givenIAddAdvertsToFavourites() {
         $(By.linkText("Добавить выбранные в закладки")).click();
     }
 
     @When("I open bookmarks page")
+    @Step
     public void whenIOpenBookmarksPage() {
         $(By.linkText("Закладки")).click();
     }
 
     @Then("I see that my bookmarks match previously selected adverts")
+    @Step
     public void thenISeeThatMyBookmarksMatchPreviouslySelectedAdverts() {
         List<String> bookmarkAdverts = new ArrayList<String>();
         ElementsCollection bookmarks = $$("table div.d1 > a");

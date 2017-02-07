@@ -29,6 +29,8 @@ dependencies {
             'org.mockito:mockito-core:2.7.0',
             'commons-io:commons-io:2.5',
             'org.jbehave:jbehave-core:4.0.4',
-            'com.codeborne:selenide:4.2.1'
+            'com.codeborne:selenide:4.2.1',
+            'ru.yandex.qatools.allure:allure-junit-adaptor:1.5.0',
+            'io.tapack:allure-jbehave-reporter:0.1'
 }
 
