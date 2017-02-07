@@ -1,4 +1,4 @@
-package org.jbehave.task.support;
+package org.jbehave.task;
 
 import org.jbehave.core.ConfigurableEmbedder;
 import org.jbehave.core.configuration.Configuration;
