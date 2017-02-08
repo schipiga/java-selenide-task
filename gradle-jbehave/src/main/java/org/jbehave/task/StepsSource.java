@@ -28,23 +28,6 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 public class StepsSource {
 
-    @BeforeStories
-    public void beforeStories() {
-        String rootPath = System.getProperty("user.dir");
-        System.setProperty("webdriver.chrome.driver", rootPath + "/../chromedriver");
-        System.setProperty("selenide.browser", "chrome");
-
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        int width = (int) screenSize.getWidth();
-        int height = (int) screenSize.getHeight();
-        VideoRecorder.conf()
-                .videoEnabled(true)                       // Disabled video globally
-                .withVideoSaveMode(VideoSaveMode.ALL)     // Save videos for passed and failed tests
-                .withRecorderType(RecorderType.FFMPEG)    // Monte is Default recorder
-                .withRecordMode(RecordingMode.ANNOTATED)  // Record video only for tests with @Video
-                .withScreenSize(width, height);
-    }
-
     private List<String> selectedAdverts;
 
     @Given("I open a browser")

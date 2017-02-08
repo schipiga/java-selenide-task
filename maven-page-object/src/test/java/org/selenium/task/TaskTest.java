@@ -7,6 +7,8 @@ import com.automation.remarks.video.enums.RecorderType;
 import com.automation.remarks.video.enums.RecordingMode;
 import com.automation.remarks.video.enums.VideoSaveMode;
 import com.automation.remarks.video.recorder.VideoRecorder;
+import com.codeborne.selenide.Configuration;
+import io.github.bonigarcia.wdm.ChromeDriverManager;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
@@ -29,12 +31,16 @@ public class TaskTest {
 
     @BeforeClass
     public static void SetUp() {
-        String rootPath = System.getProperty("user.dir");
-        System.setProperty("webdriver.chrome.driver", rootPath + "/../chromedriver");
-        System.setProperty("selenide.browser", "chrome");
+        ChromeDriverManager.getInstance().setup();
+
+        Configuration.browser = "chrome";
+        Configuration.startMaximized = true;
+        Configuration.timeout = 60;
+
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         int width = (int) screenSize.getWidth();
         int height = (int) screenSize.getHeight();
+
         VideoRecorder.conf()
                 .videoEnabled(true)                       // Disabled video globally
                 .withVideoSaveMode(VideoSaveMode.ALL)     // Save videos for passed and failed tests
@@ -44,7 +50,7 @@ public class TaskTest {
     }
 
     @Test
-    @Video(name = "my_test")
+    @Video(name = "task_test")
     public void userCanSearchAdvertsAndAddToBookmarks()
     {
         IndexPage indexPage = open(URL, IndexPage.class);
@@ -53,7 +59,8 @@ public class TaskTest {
         SectionPage sectionPage = indexPage.selectSection("Электротехника");
         SearchPage searchPage = sectionPage.search();
 
-        ResultPage resultPage = searchPage.search("Компьютер", "100", "1000", "Рига", "За последний месяц");
+        ResultPage resultPage = searchPage.search(
+                "Компьютер", "100", "1000", "Рига", "За последний месяц");
         resultPage.sortBy("Цена");
         resultPage.dealType("Продажа");
 
