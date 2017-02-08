@@ -15,7 +15,7 @@ public class Utils {
         assertThat(end).isGreaterThan(start); // last value should be less that first value
         assertThat(end - start).isGreaterThanOrEqualTo(count);  // requested count shouldn't be greater than available length
 
-        int cursor = start - 1;
+        int cursor = start;
         int length = end - start + 1;
         int[] result = new int[length];
         for (int i = 0; i < length; i++)
