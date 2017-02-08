@@ -35,7 +35,6 @@ public class TaskTest {
 
         Configuration.browser = "chrome";
         Configuration.startMaximized = true;
-        Configuration.timeout = 60;
 
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         int screenWidth = (int) screenSize.getWidth();
