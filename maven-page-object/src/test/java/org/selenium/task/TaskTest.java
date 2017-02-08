@@ -38,16 +38,17 @@ public class TaskTest {
         Configuration.timeout = 60;
 
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        int width = (int) screenSize.getWidth();
+        int screenWidth = (int) screenSize.getWidth();
         int height = (int) screenSize.getHeight();
 
         VideoRecorder.conf()
-                .videoEnabled(true)                       // Disabled video globally
+                .videoEnabled(true)                       // Delete to disabled video capture
                 .withVideoSaveMode(VideoSaveMode.ALL)     // Save videos for passed and failed tests
                 .withRecorderType(RecorderType.FFMPEG)    // Monte is Default recorder
                 .withRecordMode(RecordingMode.ANNOTATED)  // Record video only for tests with @Video
-                .withScreenSize(width, height);
+                .withScreenSize(screenWidth, height);
 
+        // Provide key to disable video capture from command line
         if (Boolean.valueOf(System.getProperty("video.disable", "false")))
                 VideoRecorder.conf().videoEnabled(false);
     }
@@ -70,7 +71,7 @@ public class TaskTest {
         searchPage = resultPage.expandedSearch();
         resultPage = searchPage.search(null, "0", "300", null, null);
 
-        List<String> selectedResults = resultPage.selectRandomResults(3);
+        List<String> selectedResults = resultPage.selectRandomAdverts(3);
 
         BookmarksPage bookmarksPage = resultPage.bookmarks();
         bookmarksPage.addSelected();

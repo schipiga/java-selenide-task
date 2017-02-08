@@ -1,14 +1,13 @@
 package org.selenium.task;
 
 import com.codeborne.selenide.ElementsCollection;
-import io.netty.util.internal.ThreadLocalRandom;
 import org.openqa.selenium.By;
+import org.selenium.task.support.Utils;
 import ru.yandex.qatools.allure.annotations.Step;
 
 import java.util.*;
 
 import static com.codeborne.selenide.Selenide.*;
-import static org.assertj.core.api.Assertions.*;
 
 /**
  * Created by schipiga on 07.02.17.
@@ -32,22 +31,20 @@ public class ResultPage {
     }
 
     @Step
-    public List<String> selectRandomResults(int count) {
+    public List<String> selectRandomAdverts(int count) {
         ElementsCollection advertLinks = $$("tr div.d1 > a");
         ElementsCollection advertCheckboxes = $$("tr > td > input[type='checkbox']");
 
-        int size = advertLinks.size();
-        assertThat(size).isGreaterThanOrEqualTo(size);
-
-        List<String> selectedResults = new ArrayList<String>();
+        List<String> selectedAdverts = new ArrayList<String>();
+        int[] random = Utils.randomArray(0, advertLinks.size(), count);
 
         for (int i = 0; i < count; i++) {
-            int rnd = ThreadLocalRandom.current().nextInt(0, size);
+            int rnd = random[i];
             advertCheckboxes.get(rnd).click();
-            selectedResults.add(advertLinks.get(rnd).getText().substring(0, 60));
+            selectedAdverts.add(advertLinks.get(rnd).getText().substring(0, 60));
         }
 
-        return selectedResults;
+        return selectedAdverts;
     }
 
     @Step
