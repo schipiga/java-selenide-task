@@ -1,22 +1,16 @@
 package org.jbehave.task;
 
-import com.automation.remarks.video.enums.RecorderType;
-import com.automation.remarks.video.enums.RecordingMode;
-import com.automation.remarks.video.enums.VideoSaveMode;
-import com.automation.remarks.video.recorder.VideoRecorder;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
-import org.jbehave.core.annotations.BeforeStories;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
+import org.jbehave.task.support.Utils;
 import org.openqa.selenium.By;
 import ru.yandex.qatools.allure.annotations.Step;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
 
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
@@ -24,19 +18,13 @@ import static com.codeborne.selenide.Selenide.open;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
- * Created by user on 08.02.17.
+ * Created by schipiga on 08.02.17.
  */
 public class StepsSource {
 
     private List<String> selectedAdverts;
 
-    @Given("I open a browser")
-    @Step
-    public void givenIOpenABrowser() {
-        // PENDING
-    }
-
-    @Given("I go to $url")
+    @Given("I navigate to $url in browser")
     @Step
     public void givenIGoTo(String url) {
         open(url);
@@ -51,14 +39,7 @@ public class StepsSource {
     @Given("I search $query with min cost $minCost with max cost $maxCost with region $region with period $period")
     @Step
     public void givenISearch(String query, String minCost, String maxCost, String region, String period) {
-        $(By.name("topt[8][min]")).setValue(minCost);
-        $(By.name("topt[8][max]")).setValue(maxCost);
-
-        $(By.name("search_region")).selectOptionContainingText(region);
-        $(By.name("pr")).selectOptionContainingText(period);
-        $(By.name("txt")).setValue(query);
-
-        $(By.name("ffrm")).submit();
+        searchAdverts(query, minCost, maxCost, region, period);
     }
 
     @Given("I sort results by $sortType")
@@ -94,9 +75,7 @@ public class StepsSource {
     @Given("I search with min cost $minCost with max cost $maxCost")
     @Step
     public void givenIExpandSearch(String minCost, String maxCost) {
-        $(By.name("topt[8][min]")).setValue(minCost);
-        $(By.name("topt[8][max]")).setValue(maxCost);
-        $(By.name("ffrm")).submit();
+        searchAdverts(null, minCost, maxCost, null, null);
     }
 
     @Given("I select randomly $count adverts")
@@ -114,21 +93,16 @@ public class StepsSource {
         }
     }
 
-    @Given("I open bookmarks page")
-    @Step
-    public void givenIOpenBookmarksPage() {
-        $(By.linkText("Закладки")).click();
-    }
-
     @Given("I add adverts to favourites")
     @Step
     public void givenIAddAdvertsToFavourites() {
         $(By.linkText("Добавить выбранные в закладки")).click();
     }
 
+    @Given("I open bookmarks page")
     @When("I open bookmarks page")
     @Step
-    public void whenIOpenBookmarksPage() {
+    public void openBookmarksPage() {
         $(By.linkText("Закладки")).click();
     }
 
@@ -145,4 +119,20 @@ public class StepsSource {
         assertThat(bookmarkAdverts.size()).isEqualTo(selectedAdverts.size());
         assertThat(bookmarkAdverts).containsAll(selectedAdverts);
     }
+
+    private void searchAdverts(String query, String minCost, String maxCost, String region, String period) {
+        if (minCost != null)
+            $(By.name("topt[8][min]")).setValue(minCost);
+        if (maxCost != null)
+            $(By.name("topt[8][max]")).setValue(maxCost);
+        if (region != null)
+            $(By.name("search_region")).selectOptionContainingText(region);
+        if (period != null)
+            $(By.name("pr")).selectOptionContainingText(period);
+        if (query != null)
+            $(By.name("txt")).setValue(query);
+
+        $(By.name("ffrm")).submit();
+    }
+
 }

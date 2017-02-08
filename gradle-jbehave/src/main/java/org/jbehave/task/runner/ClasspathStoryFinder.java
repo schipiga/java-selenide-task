@@ -1,4 +1,4 @@
-package org.jbehave.task;
+package org.jbehave.task.runner;
 
 import org.apache.commons.io.filefilter.DirectoryFileFilter;
 import org.apache.commons.io.filefilter.WildcardFileFilter;

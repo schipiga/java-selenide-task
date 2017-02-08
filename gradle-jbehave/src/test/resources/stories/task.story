@@ -1,13 +1,12 @@
 Meta:
 
 Narrative:
-As a user
-I want to perform an action
-So that I can achieve a business goal
+As a curious user
+I want to look through computer adverts
+So that I can choose a computer for me
 
 Scenario: scenario description
-Given I open a browser
-And I go to http://ss.lv
+Given I navigate to http://ss.lv in browser
 And I change language to RU
 And I click section Электротехника
 And I open search page

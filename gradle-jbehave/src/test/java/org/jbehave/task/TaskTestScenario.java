@@ -14,7 +14,7 @@ import org.junit.Test;
 
 import java.awt.*;
 
-import static org.jbehave.task.BehaviouralTestEmbedder.aBehaviouralTestRunner;
+import static org.jbehave.task.runner.BehaviouralTestEmbedder.aBehaviouralTestRunner;
 
 /**
  * Created by schipiga on 07.02.17.

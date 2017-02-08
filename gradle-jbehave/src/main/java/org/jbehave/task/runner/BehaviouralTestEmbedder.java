@@ -1,4 +1,4 @@
-package org.jbehave.task;
+package org.jbehave.task.runner;
 
 import io.tapack.allure.jbehave.AllureReporter;
 import org.jbehave.core.ConfigurableEmbedder;

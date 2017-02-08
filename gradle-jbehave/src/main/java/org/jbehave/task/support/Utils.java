@@ -1,4 +1,4 @@
-package org.jbehave.task;
+package org.jbehave.task.support;
 
 import java.util.*;
 
