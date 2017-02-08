@@ -9,7 +9,7 @@ import static com.codeborne.selenide.Selenide.page;
 /**
  * Created by schipiga on 07.02.17.
  */
-public class SearchPage {
+public class SearchPage extends BasePage {
 
     @Step
     public ResultPage search(String query, String minCost, String maxCost, String region, String period) {

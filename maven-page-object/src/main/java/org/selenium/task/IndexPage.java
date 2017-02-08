@@ -9,7 +9,7 @@ import static com.codeborne.selenide.Selenide.page;
 /**
  * Created by schipiga on 07.02.17.
  */
-public class IndexPage {
+public class IndexPage extends BasePage {
 
     @Step
     public void changeLanguageTo(String lang) {

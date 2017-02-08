@@ -9,11 +9,5 @@ import static com.codeborne.selenide.Selenide.page;
 /**
  * Created by schipiga on 07.02.17.
  */
-public class SectionPage {
-
-    @Step
-    public SearchPage search() {
-        $(By.linkText("Поиск")).click();
-        return page(SearchPage.class);
-    }
+public class SectionPage extends BasePage{
 }

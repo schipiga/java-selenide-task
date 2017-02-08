@@ -12,7 +12,7 @@ import static com.codeborne.selenide.Selenide.*;
 /**
  * Created by schipiga on 07.02.17.
  */
-public class ResultPage {
+public class ResultPage extends BasePage {
 
     @Step
     public void sortBy(String val) {
@@ -45,11 +45,5 @@ public class ResultPage {
         }
 
         return selectedAdverts;
-    }
-
-    @Step
-    public BookmarksPage bookmarks() {
-        $(By.linkText("Закладки")).click();
-        return page(BookmarksPage.class);
     }
 }

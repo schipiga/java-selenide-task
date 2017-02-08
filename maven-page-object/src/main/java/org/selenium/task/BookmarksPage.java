@@ -12,17 +12,11 @@ import static com.codeborne.selenide.Selenide.*;
 /**
  * Created by schipiga on 07.02.17.
  */
-public class BookmarksPage {
+public class BookmarksPage extends BasePage {
 
     @Step
     public void addSelected() {
-        $(By.linkText("Добавить выбранные в закладки")).click();
-    }
-
-    @Step
-    public BookmarksPage bookmarks() {
-        $(By.linkText("Закладки")).click();
-        return page(BookmarksPage.class);
+        $("#a_fav_sel").click();
     }
 
     @Step
