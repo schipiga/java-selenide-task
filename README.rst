@@ -23,20 +23,29 @@ Solution
 
 Includes two variants:
 
-- Classic Page Object Pattern, and maven build manager.
-- Steps implementation with jbehave, and gradle build manager.
+- Classic **Page Object** pattern, and **maven** build manager.
+- Steps implementation with **jbehave**, and **gradle** build manager.
 
 All variants include next features and tools:
 
-- Selenide (http://selenide.org/) - extremely excellent wrapper over selenium.
-- Allure (http://allure.qatools.ru/) - great test reporter from Yandex.
-- Video capture (http://automation-remarks.com/video-recorder-java/) - easy wrapper over ffmpeg (and other) to capture video of UI tests.
-- Webdriver manager (https://github.com/bonigarcia/webdrivermanager) - cool manager to get requested selenium webdriver.
+- ``Selenide`` (http://selenide.org/) - extremely excellent wrapper over selenium.
+- ``Allure`` (http://allure.qatools.ru/) - great test reporter from Yandex.
+- ``Video capture`` (http://automation-remarks.com/video-recorder-java/) - easy wrapper over ffmpeg (and other) to capture video of UI tests.
+- ``Webdriver manager`` (https://github.com/bonigarcia/webdrivermanager) - cool manager to get requested selenium webdriver.
 
 In order to launch it requires installed software:
 
-- ``java v1.8`` (tested)
+- ``java1.8, gradle3, maven3`` (tested)
 - ``ffmpeg`` (to capture video)
 - ``google-chrome`` (to launch UI tests)
 
 More information about both variants you can get from corresponding README inside each project.
+
+============
+Nice to have
+============
+
+Some things, that it would be nice to implemented. But it's actual more for test framework that for single test task:
+
+- ``I18n`` - currently russian strings are hardcoded. To provide more flexibility it's good variant choose messages according to language settings.
+- ``Logging`` - to capture information about what happens in code level. Allure is nice, but logs never hurt.

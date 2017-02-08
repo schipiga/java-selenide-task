@@ -39,9 +39,9 @@ public class ResultPage extends BasePage {
         int[] random = Utils.randomArray(0, advertLinks.size(), count);
 
         for (int i = 0; i < count; i++) {
-            int rnd = random[i];
-            advertCheckboxes.get(rnd).click();
-            selectedAdverts.add(advertLinks.get(rnd).getText().substring(0, 60));
+            advertCheckboxes.get(random[i]).click();
+            selectedAdverts.add(
+                advertLinks.get(random[i]).getText().substring(0, TITLE_LIMIT));
         }
 
         return selectedAdverts;

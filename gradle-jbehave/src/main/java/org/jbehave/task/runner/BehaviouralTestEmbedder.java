@@ -5,22 +5,16 @@ import org.jbehave.core.ConfigurableEmbedder;
 import org.jbehave.core.configuration.Configuration;
 import org.jbehave.core.configuration.MostUsefulConfiguration;
 import org.jbehave.core.io.LoadFromURL;
-import org.jbehave.core.reporters.FilePrintStreamFactory;
 import org.jbehave.core.reporters.StoryReporterBuilder;
 import org.jbehave.core.steps.InjectableStepsFactory;
 import org.jbehave.core.steps.InstanceStepsFactory;
-import org.jbehave.core.steps.ParameterConverters;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.text.SimpleDateFormat;
 import java.util.List;
-import java.util.Locale;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.jbehave.core.io.CodeLocations.codeLocationFromClass;
 import static org.jbehave.core.reporters.Format.CONSOLE;
-import static org.jbehave.core.reporters.Format.HTML;
 
 /**
  * A class to fully encapsulates all of the JBehave plumbing behind a builder style API. The expected usage for this would be:
@@ -29,7 +23,6 @@ import static org.jbehave.core.reporters.Format.HTML;
 public final class BehaviouralTestEmbedder extends ConfigurableEmbedder {
 
     private static final Logger LOG = LoggerFactory.getLogger(BehaviouralTestEmbedder.class);
-    public static final String BAD_USE_OF_API_MESSAGE = "You are trying to set the steps factory twice...";
 
     private String wildcardStoryFilename;
     private InjectableStepsFactory stepsFactory;
@@ -62,7 +55,6 @@ public final class BehaviouralTestEmbedder extends ConfigurableEmbedder {
     public Configuration configuration() {
         return new MostUsefulConfiguration()
                 .useStoryLoader(new LoadFromURL())
-                .useParameterConverters(new ParameterConverters().addConverters(new SandboxDateConverter()))
                 .useStoryReporterBuilder(new StoryReporterBuilder()
                         .withDefaultFormats()
                         .withFormats(CONSOLE)
@@ -82,24 +74,5 @@ public final class BehaviouralTestEmbedder extends ConfigurableEmbedder {
         assertThat(stepsFactory).isNull();
         stepsFactory = new InstanceStepsFactory(configuration(), stepsSource);
         return this;
-    }
-
-
-    private static class SandboxDateConverter extends ParameterConverters.DateConverter {
-
-        SandboxDateConverter() {
-            super(new SimpleDateFormat("dd-MM-yyyy", Locale.UK));
-        }
-    }
-
-    private static class SandboxStoryReporterBuilder extends StoryReporterBuilder {
-
-        SandboxStoryReporterBuilder() {
-            withCodeLocation(codeLocationFromClass(SandboxStoryReporterBuilder.class));
-            withDefaultFormats();
-            withFormats(HTML, CONSOLE);
-            withFailureTrace(true);
-            withPathResolver(new FilePrintStreamFactory.ResolveToSimpleName());
-        }
     }
 }

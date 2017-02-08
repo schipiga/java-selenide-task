@@ -25,7 +25,7 @@ public class BookmarksPage extends BasePage {
         ElementsCollection bookmarks = $$("table div.d1 > a");
 
         for (SelenideElement bookmark: bookmarks) {
-            bookmarkNames.add(bookmark.getText().substring(0, 60));
+            bookmarkNames.add(bookmark.getText().substring(0, TITLE_LIMIT));
         }
         return bookmarkNames;
     }

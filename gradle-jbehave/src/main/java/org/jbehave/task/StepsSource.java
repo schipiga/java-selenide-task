@@ -22,6 +22,13 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 public class StepsSource {
 
+    // As it was noted in bookmarks page advert titles are shorter that originally.
+    // That's why I decided to get only significant part of title for comparison.
+    // Yeap, more correctly to implement own custom matcher which checks that
+    // element of sequence is a part of any element of another sequence.
+    // But currently I believe it's not so important.
+    private static final int TITLE_LIMIT = 60;
+
     private List<String> selectedAdverts;
 
     @Given("I navigate to $url in browser")
@@ -72,6 +79,7 @@ public class StepsSource {
         $(By.linkText("Расширенный поиск")).click();
     }
 
+    // Seems, unfortunately jbehave doesn't provide variative arguments in steps.
     @Given("I search with min cost $minCost with max cost $maxCost")
     @Step
     public void givenIExpandSearch(String minCost, String maxCost) {
@@ -89,7 +97,8 @@ public class StepsSource {
 
         for (int i = 0; i < count; i++) {
             advertCheckboxes.get(random[i]).click();
-            selectedAdverts.add(advertLinks.get(random[i]).getText().substring(0, 60));
+            selectedAdverts.add(
+                advertLinks.get(random[i]).getText().substring(0, TITLE_LIMIT));
         }
     }
 
@@ -99,6 +108,8 @@ public class StepsSource {
         $(By.linkText("Добавить выбранные в закладки")).click();
     }
 
+    // Seems, unfortunately jbehave doesn't allow to use one function
+    // for all step types without marks duplication.
     @Given("I open bookmarks page")
     @When("I open bookmarks page")
     @Step
@@ -113,7 +124,7 @@ public class StepsSource {
         ElementsCollection bookmarks = $$("table div.d1 > a");
 
         for (SelenideElement bookmark: bookmarks) {
-            bookmarkAdverts.add(bookmark.getText().substring(0, 60));
+            bookmarkAdverts.add(bookmark.getText().substring(0, TITLE_LIMIT));
         }
 
         assertThat(bookmarkAdverts.size()).isEqualTo(selectedAdverts.size());

@@ -34,12 +34,13 @@ public class TaskTestScenario {
         int height = (int) screenSize.getHeight();
 
         VideoRecorder.conf()
-                .videoEnabled(true)                       // Disabled video globally
+                .videoEnabled(true)                       // Delete to disable video capture
                 .withVideoSaveMode(VideoSaveMode.ALL)     // Save videos for passed and failed tests
                 .withRecorderType(RecorderType.FFMPEG)    // Monte is Default recorder
                 .withRecordMode(RecordingMode.ANNOTATED)  // Record video only for tests with @Video
                 .withScreenSize(width, height);
 
+        // Provide key to disable video capture from command line
         if (Boolean.valueOf(System.getProperty("video.disable", "false")))
             VideoRecorder.conf().videoEnabled(false);
     }
