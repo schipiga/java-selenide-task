@@ -47,6 +47,9 @@ public class TaskTest {
                 .withRecorderType(RecorderType.FFMPEG)    // Monte is Default recorder
                 .withRecordMode(RecordingMode.ANNOTATED)  // Record video only for tests with @Video
                 .withScreenSize(width, height);
+
+        if (Boolean.valueOf(System.getProperty("video.disable", "false")))
+                VideoRecorder.conf().videoEnabled(false);
     }
 
     @Test
