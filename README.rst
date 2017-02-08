@@ -31,7 +31,7 @@ All variants include next features and tools:
 - ``Selenide`` (http://selenide.org/) - extremely excellent wrapper over selenium.
 - ``Allure`` (http://allure.qatools.ru/) - great test reporter from Yandex.
 - ``Video capture`` (http://automation-remarks.com/video-recorder-java/) - easy wrapper over ffmpeg (and other) to capture video of UI tests.
-- ``Webdriver manager`` (https://github.com/bonigarcia/webdrivermanager) - cool manager to get requested selenium webdriver.
+- ``Webdriver manager`` (https://github.com/bonigarcia/webdrivermanager/) - cool manager to get requested selenium webdriver.
 
 In order to launch it requires installed software:
 
@@ -45,7 +45,8 @@ More information about both variants you can get from corresponding README insid
 Nice to have
 ============
 
-Some things, that it would be nice to implemented. But it's actual more for test framework that for single test task:
+Some things, which would be nice to implement. But it is actual more for the test framework that for single test task:
 
-- ``I18n`` - currently russian strings are hardcoded. To provide more flexibility it's good variant choose messages according to language settings.
+- ``I18n`` - currently russian strings are hardcoded. To provide more flexibility it's good variant to choose messages according to language settings.
 - ``Logging`` - to capture information about what happens in code level. Allure is nice, but logs never hurt.
+- ``Xvfb`` - to launch tests in headless mode on CI.

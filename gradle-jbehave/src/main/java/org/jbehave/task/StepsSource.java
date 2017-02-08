@@ -22,7 +22,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 public class StepsSource {
 
-    // As it was noted in bookmarks page advert titles are shorter that originally.
+    // As I noted in bookmarks page advert titles are shorter that originally.
     // That's why I decided to get only significant part of title for comparison.
     // Yeap, more correctly to implement own custom matcher which checks that
     // element of sequence is a part of any element of another sequence.
@@ -40,7 +40,7 @@ public class StepsSource {
     @Given("I change language to $lang")
     @Step
     public void givenIChangeLanguageTo(String lang) {
-        $(By.linkText("RU")).click();
+        $(By.linkText(lang)).click();
     }
 
     @Given("I search $query with min cost $minCost with max cost $maxCost with region $region with period $period")
@@ -80,6 +80,7 @@ public class StepsSource {
     }
 
     // Seems, unfortunately jbehave doesn't provide variative arguments in steps.
+    // And I can't reuse previous search step.
     @Given("I search with min cost $minCost with max cost $maxCost")
     @Step
     public void givenIExpandSearch(String minCost, String maxCost) {

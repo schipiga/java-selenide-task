@@ -11,7 +11,7 @@ import static com.codeborne.selenide.Selenide.page;
  */
 public abstract class BasePage {
 
-    // As it was noted in bookmarks page advert titles are shorter that originally.
+    // As I noted in bookmarks page advert titles are shorter that originally.
     // That's why I decided to get only significant part of title for comparison.
     // Yeap, more correctly to implement own custom matcher which checks that
     // element of sequence is a part of any element of another sequence.

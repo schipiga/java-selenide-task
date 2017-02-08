@@ -2,10 +2,9 @@
 How to launch test
 ==================
 
-Inside project folder, please execute next commands in terminal::
+Inside project folder, please execute next command in terminal::
 
-    $ gradle clean
-    $ gradle test
+    $ gradle clean test
 
 ======================
 Generate allure report
