@@ -127,8 +127,13 @@ public class StepsSource {
             bookmarkAdverts.add(bookmark.getText().substring(0, TITLE_LIMIT));
         }
 
-        assertThat(bookmarkAdverts.size()).isEqualTo(selectedAdverts.size());
-        assertThat(bookmarkAdverts).containsAll(selectedAdverts);
+        assertThat(bookmarkAdverts.size())
+                .as("Bookmarks count doesn't match selected adverts count")
+                .isEqualTo(selectedAdverts.size());
+
+        assertThat(bookmarkAdverts)
+                .as("Some of bookmarks doesn't match selected adverts")
+                .containsAll(selectedAdverts);
     }
 
     private void searchAdverts(String query, String minCost, String maxCost, String region, String period) {
@@ -141,6 +146,9 @@ public class StepsSource {
         if (period != null)
             $(By.name("pr")).selectOptionContainingText(period);
         if (query != null)
+            // Query is set in last order, because it leads to opened popup with tips.
+            // This popup overlaps other elements and can't be hidden by Esc.
+            // So this way is one of some workarounds for such minor bug.
             $(By.name("txt")).setValue(query);
 
         $(By.name("ffrm")).submit();

@@ -22,6 +22,9 @@ public class SearchPage extends BasePage {
         if (period != null)
             $(By.name("pr")).selectOptionContainingText(period);
         if (query != null)
+            // Query is set in last order, because it leads to opened popup with tips.
+            // This popup overlaps other elements and can't be hidden by Esc.
+            // So this way is one of some workarounds for such minor bug.
             $(By.name("txt")).setValue(query);
         $(By.name("ffrm")).submit();
         return page(ResultPage.class);

@@ -79,7 +79,12 @@ public class TaskTest {
 
         List<String> currentBookmarks = bookmarksPage.getCurrentBookmarks();
 
-        assertThat(currentBookmarks.size()).isEqualTo(selectedAdverts.size());
-        assertThat(currentBookmarks).containsAll(selectedAdverts);
+        assertThat(currentBookmarks.size())
+                .as("Bookmarks count doesn't match selected adverts count")
+                .isEqualTo(selectedAdverts.size());
+
+        assertThat(currentBookmarks)
+                .as("Some of bookmarks doesn't match selected adverts")
+                .containsAll(selectedAdverts);
     }
 }
