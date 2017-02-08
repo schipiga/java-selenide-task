@@ -39,6 +39,9 @@ public class TaskTestScenario {
                 .withRecorderType(RecorderType.FFMPEG)    // Monte is Default recorder
                 .withRecordMode(RecordingMode.ANNOTATED)  // Record video only for tests with @Video
                 .withScreenSize(width, height);
+
+        if (Boolean.valueOf(System.getProperty("video.disable", "false")))
+            VideoRecorder.conf().videoEnabled(false);
     }
 
     @Rule
@@ -47,7 +50,8 @@ public class TaskTestScenario {
     @Test
     @Video(name = "task_story")
     public void TaskTest() throws Exception {
-        aBehaviouralTestRunner().usingStepsFrom(this, new StepsSource())
+        aBehaviouralTestRunner()
+                .usingStepsFrom(this, new StepsSource())
                 .withStory("task.story")
                 .run();
     }

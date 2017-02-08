@@ -32,4 +32,3 @@ dependencies {
     testCompile 'junit:junit:4.12',
             'io.github.bonigarcia:webdrivermanager:1.6.0'
 }
-
