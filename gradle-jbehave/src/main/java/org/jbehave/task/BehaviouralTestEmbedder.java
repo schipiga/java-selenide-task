@@ -1,5 +1,6 @@
 package org.jbehave.task;
 
+import io.tapack.allure.jbehave.AllureReporter;
 import org.jbehave.core.ConfigurableEmbedder;
 import org.jbehave.core.configuration.Configuration;
 import org.jbehave.core.configuration.MostUsefulConfiguration;
@@ -62,7 +63,10 @@ public final class BehaviouralTestEmbedder extends ConfigurableEmbedder {
         return new MostUsefulConfiguration()
                 .useStoryLoader(new LoadFromURL())
                 .useParameterConverters(new ParameterConverters().addConverters(new SandboxDateConverter()))
-                .useStoryReporterBuilder(new SandboxStoryReporterBuilder());
+                .useStoryReporterBuilder(new StoryReporterBuilder()
+                        .withDefaultFormats()
+                        .withFormats(CONSOLE)
+                        .withReporters(new AllureReporter()));
     }
 
     private List<String> createStoryPaths() {

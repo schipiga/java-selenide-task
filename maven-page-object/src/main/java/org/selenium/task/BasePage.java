@@ -12,13 +12,13 @@ import static com.codeborne.selenide.Selenide.page;
 public abstract class BasePage {
 
     @Step
-    public BookmarksPage bookmarks() {
+    public BookmarksPage openBookmarksPage() {
         $(By.linkText("Закладки")).click();
         return page(BookmarksPage.class);
     }
 
     @Step
-    public SearchPage search() {
+    public SearchPage openSearchPage() {
         $(By.linkText("Поиск")).click();
         return page(SearchPage.class);
     }

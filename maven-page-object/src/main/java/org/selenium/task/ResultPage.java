@@ -20,12 +20,12 @@ public class ResultPage extends BasePage {
     }
 
     @Step
-    public void dealType(String val) {
+    public void changeDealTypeTo(String val) {
         $(By.xpath("//span[text()='Тип сделки:']//select")).selectOptionContainingText(val);
     }
 
     @Step
-    public SearchPage expandedSearch() {
+    public SearchPage goToExpandedSearch() {
         $(By.linkText("Расширенный поиск")).click();
         return page(SearchPage.class);
     }

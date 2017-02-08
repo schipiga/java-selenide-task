@@ -15,12 +15,12 @@ import static com.codeborne.selenide.Selenide.*;
 public class BookmarksPage extends BasePage {
 
     @Step
-    public void addSelected() {
+    public void bookSelectedAdverts() {
         $("#a_fav_sel").click();
     }
 
     @Step
-    public List<String> currentBookmarks() {
+    public List<String> getCurrentBookmarks() {
         List<String> bookmarkNames = new ArrayList<String>();
         ElementsCollection bookmarks = $$("table div.d1 > a");
 

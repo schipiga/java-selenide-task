@@ -12,7 +12,7 @@ import static com.codeborne.selenide.Selenide.page;
 public class SearchPage extends BasePage {
 
     @Step
-    public ResultPage search(String query, String minCost, String maxCost, String region, String period) {
+    public ResultPage searchAdverts(String query, String minCost, String maxCost, String region, String period) {
         if (minCost != null)
             $(By.name("topt[8][min]")).setValue(minCost);
         if (maxCost != null)

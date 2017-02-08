@@ -42,7 +42,7 @@ public class TaskTest {
         int height = (int) screenSize.getHeight();
 
         VideoRecorder.conf()
-                .videoEnabled(true)                       // Delete to disabled video capture
+                .videoEnabled(true)                       // Delete to disable video capture
                 .withVideoSaveMode(VideoSaveMode.ALL)     // Save videos for passed and failed tests
                 .withRecorderType(RecorderType.FFMPEG)    // Monte is Default recorder
                 .withRecordMode(RecordingMode.ANNOTATED)  // Record video only for tests with @Video
@@ -61,25 +61,25 @@ public class TaskTest {
         indexPage.changeLanguageTo("RU");
 
         SectionPage sectionPage = indexPage.selectSection("Электротехника");
-        SearchPage searchPage = sectionPage.search();
+        SearchPage searchPage = sectionPage.openSearchPage();
 
-        ResultPage resultPage = searchPage.search(
+        ResultPage resultPage = searchPage.searchAdverts(
                 "Компьютер", "100", "1000", "Рига", "За последний месяц");
         resultPage.sortBy("Цена");
-        resultPage.dealType("Продажа");
+        resultPage.changeDealTypeTo("Продажа");
 
-        searchPage = resultPage.expandedSearch();
-        resultPage = searchPage.search(null, "0", "300", null, null);
+        searchPage = resultPage.goToExpandedSearch();
+        resultPage = searchPage.searchAdverts(null, "0", "300", null, null);
 
-        List<String> selectedResults = resultPage.selectRandomAdverts(3);
+        List<String> selectedAdverts = resultPage.selectRandomAdverts(3);
 
-        BookmarksPage bookmarksPage = resultPage.bookmarks();
-        bookmarksPage.addSelected();
-        bookmarksPage = bookmarksPage.bookmarks();
+        BookmarksPage bookmarksPage = resultPage.openBookmarksPage();
+        bookmarksPage.bookSelectedAdverts();
+        bookmarksPage = bookmarksPage.openBookmarksPage();
 
-        List<String> currentBookmarks = bookmarksPage.currentBookmarks();
+        List<String> currentBookmarks = bookmarksPage.getCurrentBookmarks();
 
-        assertThat(currentBookmarks.size()).isEqualTo(selectedResults.size());
-        assertThat(currentBookmarks).containsAll(selectedResults);
+        assertThat(currentBookmarks.size()).isEqualTo(selectedAdverts.size());
+        assertThat(currentBookmarks).containsAll(selectedAdverts);
     }
 }
