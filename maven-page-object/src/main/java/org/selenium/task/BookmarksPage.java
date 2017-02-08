@@ -21,7 +21,7 @@ public class BookmarksPage extends BasePage {
 
     @Step
     public List<String> getCurrentBookmarks() {
-        List<String> bookmarkNames = new ArrayList<String>();
+        List<String> bookmarkNames = new ArrayList<>();
         ElementsCollection bookmarks = $$("table div.d1 > a");
 
         for (SelenideElement bookmark: bookmarks) {

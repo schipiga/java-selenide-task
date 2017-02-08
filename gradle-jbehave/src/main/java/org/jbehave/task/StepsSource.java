@@ -93,7 +93,7 @@ public class StepsSource {
         ElementsCollection advertLinks = $$("tr div.d1 > a");
         ElementsCollection advertCheckboxes = $$("tr > td > input[type='checkbox']");
 
-        selectedAdverts = new ArrayList<String>();
+        selectedAdverts = new ArrayList<>();
         int[] random = Utils.randomArray(0, advertLinks.size(), count);
 
         for (int i = 0; i < count; i++) {
@@ -121,7 +121,7 @@ public class StepsSource {
     @Then("I see that my bookmarks match previously selected adverts")
     @Step
     public void thenISeeThatMyBookmarksMatchPreviouslySelectedAdverts() {
-        List<String> bookmarkAdverts = new ArrayList<String>();
+        List<String> bookmarkAdverts = new ArrayList<>();
         ElementsCollection bookmarks = $$("table div.d1 > a");
 
         for (SelenideElement bookmark: bookmarks) {

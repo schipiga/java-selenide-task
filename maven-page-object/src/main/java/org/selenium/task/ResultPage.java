@@ -35,7 +35,7 @@ public class ResultPage extends BasePage {
         ElementsCollection advertLinks = $$("tr div.d1 > a");
         ElementsCollection advertCheckboxes = $$("tr > td > input[type='checkbox']");
 
-        List<String> selectedAdverts = new ArrayList<String>();
+        List<String> selectedAdverts = new ArrayList<>();
         int[] random = Utils.randomArray(0, advertLinks.size(), count);
 
         for (int i = 0; i < count; i++) {
