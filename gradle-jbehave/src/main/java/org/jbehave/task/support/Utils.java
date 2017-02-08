@@ -9,6 +9,8 @@ import static org.assertj.core.api.Assertions.*;
  */
 public class Utils {
 
+    private Utils() {}
+
     public static int[] randomArray(int start, int end, int count) {
         assertThat(end).isGreaterThan(start); // last value should be less that first value
         assertThat(end - start).isGreaterThan(count); // requested count should be less than available length
