@@ -28,6 +28,7 @@ Includes two variants:
 
 All variants include next features and tools:
 
+- ``Junit`` (http://junit.org/) - powerful framework for testing.
 - ``Selenide`` (http://selenide.org/) - extremely excellent wrapper over selenium.
 - ``Allure`` (http://allure.qatools.ru/) - great test reporter from Yandex.
 - ``Video capture`` (http://automation-remarks.com/video-recorder-java/) - easy wrapper over ffmpeg (and other) to capture video of UI tests.
@@ -35,7 +36,7 @@ All variants include next features and tools:
 
 In order to launch it requires installed software:
 
-- ``java1.8, gradle3, maven3`` (tested)
+- ``java1.8, gradle3.3, maven3.3`` (tested)
 - ``ffmpeg`` (to capture video)
 - ``google-chrome`` (to launch UI tests)
 
